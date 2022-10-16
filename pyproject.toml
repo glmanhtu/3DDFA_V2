@@ -6,12 +6,12 @@ authors = ["cleardusk <cleardusk@cleardusk.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
+    {include = "sim3dr_cython", from="lib"},
+    {include = "cpu_nms_cleardusk", from="lib"},
     {include = "landmark_detection_cleardusk", from="src"}
 ]
 
 [tool.poetry.dependencies]
-sim3dr_cython = {path = "lib/sim3dr_cython", develop = false}
-cpu_nms_cleardusk = {path = "lib/cpu_nms_cleardusk", develop = false}
 python = ">=3.7, <3.8"
 torch = "1.12.1"
 torchvision = "0.13.1"
