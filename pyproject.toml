@@ -6,7 +6,7 @@ authors = ["cleardusk <cleardusk@cleardusk.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    {include = "landmark_detection_cleardusk"}
+    {include = "landmark_detection_cleardusk", from="src"}
 ]
 
 [tool.poetry.dependencies]
