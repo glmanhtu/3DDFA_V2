@@ -7,7 +7,7 @@
 # Written by Ross Girshick
 # --------------------------------------------------------
 
-from .nms.cpu_nms import cpu_nms, cpu_soft_nms
+from cpu_nms_cleardusk import cpu_nms, cpu_soft_nms
 
 
 def nms(dets, thresh):

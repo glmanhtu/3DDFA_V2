@@ -47,7 +47,7 @@ else:
 
 ext_modules = [
     Extension(
-        "nms.cpu_nms",
+        "cpu_nms_cleardusk",
         ["nms/cpu_nms.pyx"],
         # extra_compile_args={'gcc': ["-Wno-cpp", "-Wno-unused-function"]},
         extra_compile_args=compile_args,
