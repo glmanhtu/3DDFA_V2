@@ -1,15 +1,15 @@
-torch
-torchvision
-matplotlib
-numpy
-opencv-python # cv2
-imageio
-imageio-ffmpeg
-pyyaml # yaml
-tqdm
-argparse
-cython
-scikit-image # skimage
-scipy
-onnxruntime
-gradio
+torch==1.12.1
+torchvision==0.13.1
+matplotlib==3.5.3
+numpy==1.21.6
+opencv-python==4.6.0.66
+imageio==2.22.1
+imageio-ffmpeg==0.4.7
+pyyaml==6.0
+tqdm==4.64.1
+argparse==1.4.0
+cython==0.29.32
+scikit-image==0.19.3
+scipy==1.7.3
+onnxruntime==1.12.1
+gradio==3.5

@@ -2,10 +2,6 @@
 
 __author__ = 'cleardusk'
 
-import sys
-
-sys.path.append('..')
-
 import os.path as osp
 import numpy as np
 from utils.io import _load

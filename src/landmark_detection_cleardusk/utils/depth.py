@@ -2,14 +2,10 @@
 
 __author__ = 'cleardusk'
 
-import sys
-
-sys.path.append('..')
-
 import cv2
 import numpy as np
 
-from Sim3DR import rasterize
+from Sim3DR.Sim3DR import rasterize
 from utils.functions import plot_image
 from .tddfa_util import _to_ctype
 

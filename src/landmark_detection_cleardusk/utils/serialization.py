@@ -4,7 +4,6 @@ __author__ = 'cleardusk'
 
 import numpy as np
 
-from .tddfa_util import _to_ctype
 from .functions import get_suffix
 
 header_temp = """ply

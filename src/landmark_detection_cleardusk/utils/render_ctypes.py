@@ -13,8 +13,6 @@ cd ../..
 
 import sys
 
-sys.path.append('..')
-
 import os.path as osp
 import cv2
 import numpy as np

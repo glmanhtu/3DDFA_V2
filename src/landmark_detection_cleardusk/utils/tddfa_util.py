@@ -2,10 +2,6 @@
 
 __author__ = 'cleardusk'
 
-import sys
-
-sys.path.append('..')
-
 import argparse
 import numpy as np
 import torch

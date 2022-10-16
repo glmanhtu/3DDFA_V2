@@ -1,0 +1,7 @@
+.eggs
+build
+*.egg-info
+*.so
+
+
+lib/rasterize.cpp
