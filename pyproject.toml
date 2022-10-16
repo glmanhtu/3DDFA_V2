@@ -10,8 +10,8 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-sim3dr_cython = {path = "lib/sim3dr_cython", develop = true}
-cpu_nms_cleardusk = {path = "lib/cpu_nms_cleardusk", develop = true}
+sim3dr_cython = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/sim3dr_cython"}
+cpu_nms_cleardusk = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/cpu_nms_cleardusk"}
 python = ">=3.7, <3.8"
 torch = "1.12.1"
 torchvision = "0.13.1"
