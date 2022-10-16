@@ -27,7 +27,7 @@ resize = 1
 scale_flag = True
 HEIGHT, WIDTH = 720, 1080
 
-onnx_path = get_abs_path('weights', 'FaceBoxesProd.onnx')
+onnx_path = get_abs_path('FaceBoxes', 'weights', 'FaceBoxesProd.onnx')
 
 
 def viz_bbox(img, dets, wfp='out.jpg'):

@@ -26,7 +26,7 @@ resize = 1
 scale_flag = True
 HEIGHT, WIDTH = 720, 1080
 
-pretrained_path = get_abs_path('weights', 'FaceBoxesProd.pth')
+pretrained_path = get_abs_path('FaceBoxes', 'weights', 'FaceBoxesProd.pth')
 
 
 def viz_bbox(img, dets, wfp='out.jpg'):
