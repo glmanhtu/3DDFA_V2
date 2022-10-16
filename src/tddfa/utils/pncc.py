@@ -7,11 +7,10 @@ import numpy as np
 import os.path as osp
 
 from tddfa.Sim3DR.Sim3DR import rasterize
+from tddfa.utils.config import get_abs_path
 from tddfa.utils.functions import plot_image
 from tddfa.utils.io import _load, _dump
 from tddfa.utils.tddfa_util import _to_ctype
-
-make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
 
 
 def calc_ncc_code():
@@ -24,11 +23,11 @@ def calc_ncc_code():
     for i in range(3):
         u[i] = (u[i] - u[i].min()) / (u[i].max() - u[i].min())
 
-    _dump('../configs/ncc_code.npy', u)
+    _dump(get_abs_path('configs', 'ncc_code.npy'), u)
 
 
 def pncc(img, ver_lst, tri, show_flag=False, wfp=None, with_bg_flag=True):
-    ncc_code = _load(make_abs_path('../configs/ncc_code.npy'))
+    ncc_code = _load(get_abs_path('configs', 'ncc_code.npy'))
 
     if with_bg_flag:
         overlap = img.copy()

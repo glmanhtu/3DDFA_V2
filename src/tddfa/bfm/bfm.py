@@ -4,9 +4,9 @@ __author__ = 'cleardusk'
 
 import os.path as osp
 import numpy as np
-from tddfa.utils.io import _load
 
-make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
+from tddfa.utils.config import get_abs_path
+from tddfa.utils.io import _load
 
 
 def _to_ctype(arr):
@@ -22,7 +22,7 @@ class BFMModel(object):
         self.w_shp = bfm.get('w_shp').astype(np.float32)[..., :shape_dim]
         self.w_exp = bfm.get('w_exp').astype(np.float32)[..., :exp_dim]
         if osp.split(bfm_fp)[-1] == 'bfm_noneck_v3.pkl':
-            self.tri = _load(make_abs_path('../configs/tri.pkl'))  # this tri/face is re-built for bfm_noneck_v3
+            self.tri = _load(get_abs_path('configs', 'tri.pkl'))  # this tri/face is re-built for bfm_noneck_v3
         else:
             self.tri = bfm.get('tri')
 

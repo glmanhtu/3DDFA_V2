@@ -6,6 +6,7 @@ import torch
 import numpy as np
 import cv2
 
+from tddfa.utils.config import get_abs_path
 from .utils.prior_box import PriorBox
 from .utils.nms_wrapper import nms
 from .utils.box_utils import decode
@@ -26,8 +27,7 @@ resize = 1
 scale_flag = True
 HEIGHT, WIDTH = 720, 1080
 
-make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
-onnx_path = make_abs_path('weights/FaceBoxesProd.onnx')
+onnx_path = get_abs_path('weights', 'FaceBoxesProd.onnx')
 
 
 def viz_bbox(img, dets, wfp='out.jpg'):

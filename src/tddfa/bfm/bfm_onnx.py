@@ -8,9 +8,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from tddfa.utils.config import get_abs_path
 from tddfa.utils.io import _load, _numpy_to_cuda, _numpy_to_tensor
-
-make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
 
 
 def _to_ctype(arr):
@@ -21,7 +20,7 @@ def _to_ctype(arr):
 
 def _load_tri(bfm_fp):
     if osp.split(bfm_fp)[-1] == 'bfm_noneck_v3.pkl':
-        tri = _load(make_abs_path('../configs/tri.pkl'))  # this tri/face is re-built for bfm_noneck_v3
+        tri = _load(get_abs_path('configs', 'tri.pkl'))  # this tri/face is re-built for bfm_noneck_v3
     else:
         tri = _load(bfm_fp).get('tri')
 

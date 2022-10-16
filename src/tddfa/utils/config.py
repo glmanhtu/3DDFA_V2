@@ -5,6 +5,10 @@ import yaml
 root_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 
 
+def get_abs_path(*path):
+    return os.path.join(root_path, *path)
+
+
 class LandmarkDetectorConfig:
 
     def __init__(self):
@@ -15,7 +19,7 @@ class LandmarkDetectorConfig:
 
     @staticmethod
     def default_config(name="mb1_120x120.yml"):
-        config_file = os.path.join(root_path, "configs", name)
+        config_file = get_abs_path("configs", name)
         config = LandmarkDetectorConfig()
         config.load_config_file(config_file)
         return config

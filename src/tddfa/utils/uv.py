@@ -8,11 +8,10 @@ import os.path as osp
 import scipy.io as sio
 
 from tddfa.Sim3DR.Sim3DR import rasterize
+from tddfa.utils.config import get_abs_path
 from tddfa.utils.functions import plot_image
 from tddfa.utils.io import _load
 from tddfa.utils.tddfa_util import _to_ctype
-
-make_abs_path = lambda fn: osp.join(osp.dirname(osp.realpath(__file__)), fn)
 
 
 def load_uv_coords(fp):
@@ -29,8 +28,8 @@ def process_uv(uv_coords, uv_h=256, uv_w=256):
     return uv_coords
 
 
-g_uv_coords = load_uv_coords(make_abs_path('../configs/BFM_UV.mat'))
-indices = _load(make_abs_path('../configs/indices.npy'))  # todo: handle bfm_slim
+g_uv_coords = load_uv_coords(get_abs_path('configs', 'BFM_UV.mat'))
+indices = _load(get_abs_path('configs', 'indices.npy'))  # todo: handle bfm_slim
 g_uv_coords = g_uv_coords[indices, :]
 
 
