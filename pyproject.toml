@@ -1,12 +1,12 @@
 [tool.poetry]
-name = "landmark-detection-cleardusk"
+name = "tddfa"
 version = "0.1.0"
 description = ""
 authors = ["cleardusk <cleardusk@cleardusk.com>"]
 license = "MIT"
 readme = "README.md"
 packages = [
-    {include = "landmark_detection_cleardusk", from="src"}
+    {include = "tddfa", from="src"}
 ]
 
 [tool.poetry.dependencies]

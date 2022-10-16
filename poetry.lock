@@ -179,7 +179,7 @@ develop = false
 type = "git"
 url = "https://github.com/glmanhtu/3DDFA_V2.git"
 reference = "HEAD"
-resolved_reference = "8baad807330991337e0c61bcc401745288de5f54"
+resolved_reference = "0989f7b6d3e53a30a74eb4e24f04f66fcabf9dfa"
 subdirectory = "lib/cpu_nms_cleardusk"
 [[package]]
 name = "cryptography"
@@ -952,7 +952,7 @@ develop = false
 type = "git"
 url = "https://github.com/glmanhtu/3DDFA_V2.git"
 reference = "HEAD"
-resolved_reference = "8baad807330991337e0c61bcc401745288de5f54"
+resolved_reference = "0989f7b6d3e53a30a74eb4e24f04f66fcabf9dfa"
 subdirectory = "lib/sim3dr_cython"
 [[package]]
 name = "six"
