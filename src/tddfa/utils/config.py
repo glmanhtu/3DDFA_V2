@@ -15,7 +15,7 @@ class LandmarkDetectorConfig:
 
     @staticmethod
     def default_config(name="mb1_120x120.yml"):
-        config_file = os.path.join(root_path, "config", name)
+        config_file = os.path.join(root_path, "configs", name)
         config = LandmarkDetectorConfig()
         config.load_config_file(config_file)
         return config
