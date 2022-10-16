@@ -98,7 +98,7 @@ class FacialLandmarkDetector:
             queue_frame.append(frame_bgr.copy())
 
             ver_ave = np.mean(queue_ver, axis=0)
-            yield frame_bgr[n_pre], [ver_ave]
+            yield queue_frame[n_pre], [ver_ave]
 
             queue_ver.popleft()
             queue_frame.popleft()
