@@ -31,8 +31,14 @@ class FacialLandmarkDetector:
             self.tddfa = TDDFA(gpu_mode=gpu_mode, **cfg)
             self.face_boxes = FaceBoxes()
 
-    # def single_image_detect(self, image):
-    #
+    def single_image_detect(self, image, dense_flag):
+        boxes = self.face_boxes(image)
+        if len(boxes) == 0:
+            return [], []
+
+        param_lst, roi_box_lst = self.tddfa(image, boxes)
+        ver_lst = self.tddfa.recon_vers(param_lst, roi_box_lst, dense_flag=dense_flag)
+        return boxes, ver_lst, param_lst
 
     def is_valid_boxes(self, roi_boxes):
         if len(roi_boxes) == 0:
