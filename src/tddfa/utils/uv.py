@@ -4,7 +4,6 @@ __author__ = 'cleardusk'
 
 import cv2
 import numpy as np
-import os.path as osp
 import scipy.io as sio
 
 from tddfa.Sim3DR.Sim3DR import rasterize
