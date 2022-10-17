@@ -26,7 +26,7 @@ def read_cv2(vid_file):
 video_reader = read_cv2(args.input)
 dense = False if args.opt == '2d_sparse' else True
 detector = FacialLandmarkDetector(LandmarkDetectorConfig.default_config(), use_onnx=args.onnx)
-for frame, landmarks in detector.tracking_and_detect(video_reader, dense_flag=dense):
+for frame, landmarks in detector.tracking_and_detect(video_reader, dense_flag=dense, smooth=False):
     if args.opt in ['2d_sparse', '2d_dense']:
         img_draw = cv_draw_landmark(frame, landmarks[0])
     elif args.opt == '3d':

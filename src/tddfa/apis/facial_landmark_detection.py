@@ -46,11 +46,12 @@ class FacialLandmarkDetector:
         roi_box = roi_boxes[0]
         return abs(roi_box[2] - roi_box[0]) * abs(roi_box[3] - roi_box[1]) >= self.box_valid_threshold
 
-    def tracking_and_detect(self, stream_reader, n_pre=1, n_next=1, dense_flag=False):
+    def tracking_and_detect(self, stream_reader, n_pre=1, n_next=1, dense_flag=False, smooth=True):
         """
         Grabs frames from stream source and performs the facial landmark detection
         Supports only one face in camera/video
 
+        @param smooth: Smooth the transition of the movement between consecutive frames
         @param dense_flag:
         @param stream_reader: Source of the stream, suppose to be an iterator of BRG image frames
         @param n_pre: number of frames look back for smoothing
@@ -82,7 +83,7 @@ class FacialLandmarkDetector:
 
             ver = self.tddfa.recon_vers(param_lst, roi_box_lst, dense_flag=dense_flag)
 
-            if len(ver) == 0:
+            if len(ver) == 0 or not smooth:
                 yield frame_bgr, ver
                 continue
 
