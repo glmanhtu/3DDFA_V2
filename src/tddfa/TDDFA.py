@@ -2,21 +2,21 @@
 
 __author__ = 'cleardusk'
 
-import os.path as osp
 import time
-import numpy as np
+
 import cv2
+import numpy as np
 import torch
-from torchvision.transforms import Compose
 import torch.backends.cudnn as cudnn
+from torchvision.transforms import Compose
 
 from . import models
 from .bfm import BFMModel
 from .utils.config import get_abs_path
-from .utils.io import _load
 from .utils.functions import (
     crop_img, parse_roi_box_from_bbox, parse_roi_box_from_landmark,
 )
+from .utils.io import _load
 from .utils.tddfa_util import (
     load_model, _parse_param, similar_transform,
     ToTensorGjz, NormalizeGjz
