@@ -5,7 +5,6 @@ __author__ = 'cleardusk'
 import os
 from collections import deque
 
-import imageio
 import numpy as np
 
 
@@ -41,19 +40,16 @@ class FacialLandmarkDetector:
         roi_box = roi_boxes[0]
         return abs(roi_box[2] - roi_box[0]) * abs(roi_box[3] - roi_box[1]) >= self.box_valid_threshold
 
-    def tracking_and_detect(self, stream='<video0>', n_pre=1, n_next=1, dense_flag=False):
+    def tracking_and_detect(self, stream_reader, n_pre=1, n_next=1, dense_flag=False):
         """
         Grabs frames from stream source and performs the facial landmark detection
         Supports only one face in camera/video
 
         @param dense_flag:
-        @param stream: Source of the stream, can be video file or camera
+        @param stream_reader: Source of the stream, suppose to be an iterator of BRG image frames
         @param n_pre: number of frames look back for smoothing
         @param n_next: number of frames look ahead for smoothing
         """
-        # Given a camera
-        # before run this line, make sure you have installed `imageio-ffmpeg`
-        reader = imageio.get_reader(stream)
 
         # the simple implementation of average smoothing by looking ahead by n_next frames
         queue_ver, queue_frame = deque(), deque()
@@ -61,8 +57,7 @@ class FacialLandmarkDetector:
         # run
         ver = []
 
-        for i, frame in enumerate(reader):
-            frame_bgr = frame[..., ::-1]  # RGB->BGR
+        for i, frame_bgr in enumerate(stream_reader):
             first_frame_detected = False
 
             if len(ver) == 0:
@@ -91,11 +86,11 @@ class FacialLandmarkDetector:
                 queue_ver.clear()   # Clear previous landmark vector
                 queue_frame.clear()     # Clear previous frames
                 for _ in range(n_pre + n_next):
-                    queue_ver.append(current_ver.copy())
-                    queue_frame.append(frame_bgr.copy())
+                    queue_ver.append(current_ver)
+                    queue_frame.append(frame_bgr)
 
-            queue_ver.append(current_ver.copy())
-            queue_frame.append(frame_bgr.copy())
+            queue_ver.append(current_ver)
+            queue_frame.append(frame_bgr)
 
             ver_ave = np.mean(queue_ver, axis=0)
             yield queue_frame[n_pre], [ver_ave]

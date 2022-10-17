@@ -2,7 +2,6 @@
 
 __author__ = 'cleardusk'
 
-import argparse
 import numpy as np
 import torch
 
@@ -19,7 +18,7 @@ def str2bool(v):
     elif v.lower() in ('no', 'false', 'f', 'n', '0'):
         return False
     else:
-        raise argparse.ArgumentTypeError('Boolean value expected')
+        raise ValueError('Boolean value expected')
 
 
 def load_model(model, checkpoint_fp):
