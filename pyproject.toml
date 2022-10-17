@@ -13,14 +13,14 @@ packages = [
 sim3dr_cython = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/sim3dr_cython"}
 cpu_nms_cleardusk = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/cpu_nms_cleardusk"}
 python = ">=3.7, <3.8"
-torch = "1.12.1"
-torchvision = "0.13.1"
-matplotlib = "3.5.3"
-numpy = "1.21.6"
-opencv-python = "4.6.0.66"
-pyyaml = "6.0"
-scipy = "1.7.3"
-onnxruntime = "1.12.1"
+torch = "^1.7.0"
+torchvision = "^0.8.0"
+matplotlib = "^3.3.0"
+numpy = "^1.15.0"
+opencv-python = "^4.2.0.32"
+pyyaml = "*"
+scipy = "*"
+onnxruntime = "^1.12.1"
 
 
 [build-system]
