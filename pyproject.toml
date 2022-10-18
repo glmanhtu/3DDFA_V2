@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["cleardusk <cleardusk@cleardusk.com>"]
 license = "MIT"
-readme = "README.md"
+readme = "readme.md"
 packages = [
     {include = "tddfa", from="src"}
 ]
