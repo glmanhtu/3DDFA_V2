@@ -6,6 +6,7 @@ from tddfa.apis.facial_landmark_detection import FacialLandmarkDetector
 from tddfa.utils.config import LandmarkDetectorConfig
 from tddfa.utils.functions import cv_draw_landmark
 from tddfa.utils.render import render
+from src.tddfa.utils import functions
 
 parser = argparse.ArgumentParser(description='The smooth demo of webcam and video')
 parser.add_argument('-i', '--input', type=str, default=0, help='Path to video file')
@@ -13,17 +14,7 @@ parser.add_argument('-o', '--opt', type=str, default='2d_sparse', choices=['2d_s
 parser.add_argument('--onnx', action='store_true', default=False)
 args = parser.parse_args()
 
-
-def read_cv2(vid_file):
-    vidcap = cv2.VideoCapture(vid_file)
-    success = True
-    while success:
-        success, image = vidcap.read()
-        if success:
-            yield image
-
-
-video_reader = read_cv2(args.input)
+video_reader = functions.read_cv2(args.input)
 dense = False if args.opt == '2d_sparse' else True
 detector = FacialLandmarkDetector(LandmarkDetectorConfig.default_config(), use_onnx=args.onnx)
 for frame, landmarks in detector.tracking_and_detect(video_reader, dense_flag=dense):

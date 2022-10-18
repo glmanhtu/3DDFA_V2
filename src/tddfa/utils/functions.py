@@ -179,4 +179,17 @@ def cv_draw_landmark(img_ori, pts, box=None, color=GREEN, size=1):
         cv2.line(img, left_bottom, left_top, BLUE, 1, cv2.LINE_AA)
 
     return img
-    
+
+
+def read_cv2(vid_file=0):
+    """
+    Simple wrapper function for getting frames from webcam or video file
+    Args:
+        vid_file: path to the video file. Passing 0 means using webcam instead
+    """
+    vidcap = cv2.VideoCapture(vid_file)
+    success = True
+    while success:
+        success, image = vidcap.read()
+        if success:
+            yield image
