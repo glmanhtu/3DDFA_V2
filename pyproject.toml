@@ -10,12 +10,10 @@ packages = [
 ]
 
 [build-system]
-requires = ["poetry-core", "numpy==1.21.1", "Cython>=0.29.32"]
+requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
-sim3dr_cython = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/sim3dr_cython"}
-cpu_nms_cleardusk = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/cpu_nms_cleardusk"}
 python = ">=3.7"
 torch = ">=1.7.0"
 torchvision = ">=0.8.0"
@@ -25,3 +23,5 @@ opencv-python = ">=4.0.1.24"
 pyyaml = ">=5.1"
 scipy = ">=1.3.0"
 onnxruntime = ">=1.0.0"
+sim3dr_cython = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/sim3dr_cython"}
+cpu_nms_cleardusk = {git = "https://github.com/glmanhtu/3DDFA_V2.git", subdirectory= "lib/cpu_nms_cleardusk"}
