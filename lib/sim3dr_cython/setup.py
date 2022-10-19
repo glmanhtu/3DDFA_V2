@@ -5,7 +5,7 @@ to compile
 
 from setuptools import dist
 
-dist.Distribution().fetch_build_eggs(['Cython>=0.29.32', 'numpy>=1.23.1'])
+dist.Distribution().fetch_build_eggs(['Cython>=0.29.32', 'numpy~1.21.1'])
 
 from distutils.core import setup, Extension
 from Cython.Build import cythonize
