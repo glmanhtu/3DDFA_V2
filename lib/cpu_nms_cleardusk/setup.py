@@ -8,7 +8,7 @@
 # --------------------------------------------------------
 from setuptools import dist
 
-dist.Distribution().fetch_build_eggs(['Cython>=0.29.32', 'numpy>=1.15.0'])
+dist.Distribution().fetch_build_eggs(['Cython>=0.29.32', 'numpy>=1.20.0'])
 
 import os
 import sys
