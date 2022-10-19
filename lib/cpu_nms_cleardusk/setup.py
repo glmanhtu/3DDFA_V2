@@ -6,9 +6,6 @@
 # Licensed under The MIT License [see LICENSE for details]
 # Written by Ross Girshick
 # --------------------------------------------------------
-from setuptools import dist
-
-dist.Distribution().fetch_build_eggs(['Cython>=0.29.32', 'numpy==1.21.1'])
 
 import os
 import sys
