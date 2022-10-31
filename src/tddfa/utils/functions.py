@@ -9,6 +9,8 @@ import cv2
 from math import sqrt
 import matplotlib.pyplot as plt
 
+from src.tddfa.utils import gpa
+
 RED = (0, 0, 255)
 GREEN = (0, 255, 0)
 BLUE = (255, 0, 0)
@@ -281,3 +283,39 @@ class CentralCrop(object):
         landmarks *= [new_w / distance, new_h / distance]
 
         return image, landmarks
+
+
+class GPAAlignment:
+    """
+    Employ Generalised Procrusters analysis to align both the image and the landmarks, based on the reference
+    mean shape. See utils/gpa.py for how to generate the mean shape
+    """
+
+    def __init__(self, mean_shape):
+        self.mean_shape = mean_shape
+
+    def __call__(self, image, landmarks):
+        """
+        @param image: np image
+        @param landmarks: 2D landmarks with shape (n_points,2)
+        @return: aligned image, adjusted landmarks
+        """
+        _, aligned_landmarks, tform = gpa.procrustes(self.mean_shape, landmarks)
+
+        rotate = np.identity(3)
+        rotate[:2, :2] = tform['rotation'].transpose()
+        translate = np.identity(3)
+        translate[:2, -1] = tform['translation']
+
+        scale = np.identity(3)
+        scale[0, 0] = tform['scale']
+        scale[1, 1] = tform['scale']
+
+        m_translate = np.dot(translate, scale)
+        m = np.dot(m_translate, rotate)
+
+        rows, cols, _ = image.shape
+        im2 = cv2.warpAffine(image, m[:-1, :], (cols, rows), flags=cv2.INTER_CUBIC)
+        im2 = np.clip(im2, 0, 255)
+
+        return im2, aligned_landmarks
