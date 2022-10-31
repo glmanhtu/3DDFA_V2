@@ -2,6 +2,8 @@
 
 __author__ = 'cleardusk'
 
+import math
+
 import numpy as np
 import cv2
 from math import sqrt
@@ -193,3 +195,89 @@ def read_cv2(vid_file=0):
         success, image = vidcap.read()
         if success:
             yield image
+
+
+def get_landmark_most_points(landmarks):
+    min_x, min_y, max_x, max_y = 9999, 9999, 0, 0
+    for landmark in landmarks:
+        if min_x > landmark[0]:
+            min_x = landmark[0]
+        if max_x < landmark[0]:
+            max_x = landmark[0]
+        if min_y > landmark[1]:
+            min_y = landmark[1]
+        if max_y < landmark[1]:
+            max_y = landmark[1]
+    return min_x, min_y, max_x, max_y
+
+
+class CentralCrop(object):
+    """Crop the image in a sample.
+        Make sure the head is in the central of image
+    Args:
+        output_size (tuple or int): Desired output size. If int, square crop is made.
+    """
+
+    def __init__(self, output_size, zoom_percent=0.15, close_top=0.6, left=0.5):
+        assert isinstance(output_size, (int, tuple))
+        if isinstance(output_size, int):
+            self.output_size = (output_size, output_size)
+        else:
+            assert len(output_size) == 2
+            self.output_size = output_size
+        self.zoom_percent = zoom_percent
+        self.close_top = close_top
+        self.left = left
+
+    def __call__(self, image, landmarks):
+        """
+        Crop an image based on its facial landmarks
+        @param image: np image
+        @param landmarks: 2D landmarks with shape (n_points,2)
+        @return: cropped image, adjusted landmarks
+        """
+        h, w = image.shape[:2]
+        new_h, new_w = self.output_size
+
+        min_x, min_y, max_x, max_y = get_landmark_most_points(landmarks)
+        face_size = max_x - min_x
+        if self.zoom_percent == -1:
+            distance = new_h
+        else:
+            gap = face_size * self.zoom_percent
+            distance = int(face_size + gap * 2)
+            if distance > min(w, h):
+                distance = min(w, h)
+
+        x = int(min_x - (distance - (max_x - min_x)) * self.left)
+        if x > min_x:
+            x = math.floor(min_x)
+        if x < 0:
+            x = 0
+        if x + distance < max_x:
+            x = int(math.ceil(max_x) - distance)
+        if x + distance > w:
+            x = w - distance
+        y = int(min_y - (distance - (max_y - min_y)) * self.close_top)
+        if y > min_y:
+            y = math.floor(min_y)
+        if y < 0:
+            y = 0
+        # if y + distance < max_y:
+        #     y = int(math.ceil(max_y) - distance)
+
+        # if y + distance > h:
+        #     y = h - distance
+
+        image = image[y: y + distance, x: x + distance].copy()
+        height, width = image.shape[:2]
+        out_img = np.zeros((distance, distance, 3), dtype=np.uint8)
+        out_img[0:height, 0:width] = image
+
+        landmarks = landmarks - np.array([x, y])
+
+        image = cv2.resize(image, self.output_size, interpolation=cv2.INTER_AREA)
+
+        landmarks *= [new_w / distance, new_h / distance]
+
+        return image, landmarks
