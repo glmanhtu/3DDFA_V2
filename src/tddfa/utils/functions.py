@@ -9,7 +9,7 @@ import cv2
 from math import sqrt
 import matplotlib.pyplot as plt
 
-from src.tddfa.utils import gpa
+from tddfa.utils import gpa
 
 RED = (0, 0, 255)
 GREEN = (0, 255, 0)
@@ -211,6 +211,17 @@ def get_landmark_most_points(landmarks):
         if max_y < landmark[1]:
             max_y = landmark[1]
     return min_x, min_y, max_x, max_y
+
+
+def to_66_points_standard(lm_68_points):
+    """
+    Convert the 68 points landmark (3, 68) to standard 66 points landmark (66, 2)
+    @param lm_68_points:
+    @return:
+    """
+    landmark_68_points = lm_68_points.transpose()[:, 0:2]
+    landmark_66_points = np.delete(landmark_68_points, [60, 64], 0)
+    return landmark_66_points
 
 
 class CentralCrop(object):
